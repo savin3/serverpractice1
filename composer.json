@@ -1,0 +1,14 @@
+{
+    "name": "savin3/serverpractice1",
+    "description": "Simple mvc freamework",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "savin ilya",
+            "email": "savin15ilya3112@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
