@@ -58,5 +58,4 @@ class View
     {
         return $this->render($this->view, $this->data);
     }
-
 }
