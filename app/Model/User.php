@@ -10,9 +10,8 @@ class User extends Model implements IdentityInterface
 {
     use HasFactory;
 
-    public $timestamps = false;
+    const UPDATED_AT = null;
     protected $fillable = [
-        'name',
         'login',
         'password'
     ];
@@ -39,5 +38,25 @@ class User extends Model implements IdentityInterface
     {
         return self::where(['login' => $credentials['login'],
             'password' => md5($credentials['password'])])->first();
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'userrole');
+    }
+
+    public function isAdmin()
+    {
+        return $this->roles->contains('name', 'admin');
+    }
+
+    public function isAccountant()
+    {
+        return $this->roles->contains('name', 'accountant');
+    }
+
+    public function payslips()
+    {
+        return $this->hasMany(Payslip::class);
     }
 }
