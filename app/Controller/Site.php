@@ -7,6 +7,7 @@ use Src\View;
 use Src\Request;
 use Model\User;
 use Src\Auth\Auth;
+use Model\Employee;
 
 class Site
 {
@@ -45,5 +46,50 @@ class Site
     {
         Auth::logout();
         app()->route->redirect('/hello');
+    }
+
+    public function employees(): string
+    {
+        $employees = Employee::all();
+        return (new View())->render('site.employees', ['employees' => $employees]);
+    }
+
+    public function accruals(): string
+    {
+        return (new View())->render('site.accruals');
+    }
+
+    public function deductions(): string
+    {
+        return (new View())->render('site.deductions');
+    }
+
+    public function payslip(): string
+    {
+        return (new View())->render('site.payslip');
+    }
+
+    public function employee(int $id): string
+    {
+        $employee = Employee::findOrFail($id);
+        return (new View())->render('site.employee', ['employee' => $employee]);
+    }
+
+    public function employeeAccruals(int $id): string
+    {
+        $employee = Employee::findOrFail($id);
+        return (new View())->render('site.employee_accruals', ['employee' => $employee]);
+    }
+
+    public function employeeDeductions(int $id): string
+    {
+        $employee = Employee::findOrFail($id);
+        return (new View())->render('site.employee_deductions', ['employee' => $employee]);
+    }
+
+    public function employeePayslips(int $id): string
+    {
+        $employee = Employee::findOrFail($id);
+        return (new View())->render('site.employee_payslips', ['employee' => $employee]);
     }
 }
