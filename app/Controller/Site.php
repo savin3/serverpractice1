@@ -69,10 +69,10 @@ class Site
         return (new View())->render('site.payslip');
     }
 
-    public function employee(int $id): string
+    public function dashboard(): string
     {
-        $employee = Employee::findOrFail($id);
-        return (new View())->render('site.employee', ['employee' => $employee]);
+        $employees = Employee::all();
+        return (new View())->render('site.dashboard', ['employees' => $employees]);
     }
 
     public function employeeAccruals(int $id): string
