@@ -2,19 +2,36 @@
 
 use Src\Route;
 use Controller\Site;
+use Controller\UserController;
+use Controller\EmployeeController;
+use Controller\AccrualController;
+use Controller\DeductionController;
+use Controller\PayslipController;
+use Controller\AdminController;
 
 Route::add('GET', '/hello', [Controller\Site::class, 'hello'])
     ->middleware('auth');
 Route::add(['GET', 'POST'], '/signup', [Controller\Site::class, 'signup']);
-Route::add(['GET', 'POST'], '/login', [Controller\Site::class, 'login']);
-Route::add('GET', '/logout', [Controller\Site::class, 'logout']);
-Route::add('GET', '/dashboard', [Site::class, 'dashboard'])->middleware('auth');
-Route::add('GET', '/accruals', [Site::class, 'accruals'])->middleware('auth');
-Route::add('GET', '/deductions', [Site::class, 'deductions'])->middleware('auth');
-Route::add('GET', '/payslip', [Site::class, 'payslip'])->middleware('auth');
-Route::add('GET', '/employee/{id}', [Site::class, 'employee'])->middleware('auth');
-Route::add('GET', '/employee/{id}/accruals', [Site::class, 'employeeAccruals'])->middleware('auth');
-Route::add('GET', '/employee/{id}/deductions', [Site::class, 'employeeDeductions'])->middleware('auth');
-Route::add('GET', '/employee/{id}/payslips', [Site::class, 'employeePayslips'])->middleware('auth');
-Route::add(['GET', 'POST'], '/admin/employee/add', [Admin::class, 'addEmployee'])->middleware('auth');
-Route::add(['GET', 'POST'], '/admin/user/add', [Admin::class, 'addUser'])->middleware('auth');
+
+Route::add(['GET', 'POST'], '/login', [UserController::class, 'login']);
+Route::add('GET', '/logout', [UserController::class, 'logout']);
+
+Route::add('GET', '/dashboard', [EmployeeController::class, 'dashboard'])->middleware('auth');
+Route::add('GET', '/employee/{id}', [EmployeeController::class, 'employee'])->middleware('auth');
+Route::add('GET', '/employee/{id}/accruals', [EmployeeController::class, 'employeeAccruals'])->middleware('auth');
+Route::add('GET', '/employee/{id}/deductions', [EmployeeController::class, 'employeeDeductions'])->middleware('auth');
+Route::add('GET', '/employee/{id}/payslips', [EmployeeController::class, 'employeePayslips'])->middleware('auth');
+
+Route::add('GET', '/accruals', [AccrualController::class, 'index'])->middleware('auth');
+Route::add('POST', '/accruals/store', [AccrualController::class, 'store'])->middleware('auth');
+
+Route::add('GET', '/deductions', [DeductionController::class, 'index'])->middleware('auth');
+Route::add('POST', '/deductions/store', [DeductionController::class, 'store'])->middleware('auth');
+
+Route::add('GET', '/payslip', [PayslipController::class, 'index'])->middleware('auth');
+Route::add('POST', '/payslip/generate', [PayslipController::class, 'generate'])->middleware('auth');
+
+Route::add('GET', '/admin/employee/add', [AdminController::class, 'addEmployee'])->middleware('auth');
+Route::add('POST', '/admin/employee/store', [AdminController::class, 'storeEmployee'])->middleware('auth');
+Route::add('GET', '/admin/user/add', [AdminController::class, 'addUser'])->middleware('auth');
+Route::add('POST', '/admin/user/store', [AdminController::class, 'storeUser'])->middleware('auth');
