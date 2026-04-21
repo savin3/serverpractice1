@@ -1,6 +1,7 @@
 <?php
 
 use Src\Route;
+use Controller\Site;
 
 Route::add('GET', '/hello', [Controller\Site::class, 'hello'])
     ->middleware('auth');

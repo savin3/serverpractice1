@@ -11,23 +11,15 @@ class Deduction extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'employee_id',
         'amount',
         'month',
-        'deduction_type_id',
+        'deduction_type',
         'date_of_deduction',
-        'comment',
-        'start_date',
-        'end_date'
+        'comment'
     ];
 
-    public function employee()
+    public function transactions()
     {
-        return $this->belongsTo(Employee::class);
-    }
-
-    public function type()
-    {
-        return $this->belongsTo(DeductionType::class, 'deduction_type_id');
+        return $this->hasMany(Transaction::class);
     }
 }

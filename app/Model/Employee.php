@@ -19,31 +19,19 @@ class Employee extends Model
         'insurance_number',
         'bank_account',
         'date_employment',
-        'bonus'
+        'position',
+        'department',
+        'bonus',
+        'salary'
     ];
-
-    public function positions()
-    {
-        return $this->belongsToMany(Position::class, 'employeeposition');
-    }
-
-    public function departments()
-    {
-        return $this->belongsToMany(Department::class, 'employeedepartment');
-    }
 
     public function accruals()
     {
         return $this->hasMany(Accrual::class);
     }
 
-    public function deductions()
+    public function transactions()
     {
-        return $this->hasMany(Deduction::class);
-    }
-
-    public function payslips()
-    {
-        return $this->hasMany(Payslip::class);
+        return $this->hasManyThrough(Transaction::class, Accrual::class);
     }
 }

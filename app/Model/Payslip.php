@@ -8,21 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Payslip extends Model
 {
     use HasFactory;
+    const CREATED_AT = 'created_at';
     const UPDATED_AT = null;
 
     protected $fillable = [
-        'employee_id',
-        'user_id',
-        'start_date',
-        'end_date',
-        'total_accruals',
-        'total_deductions',
-        'amount_to_pay'
+        'transaction_id',
+        'user_id'
     ];
 
-    public function employee()
+    public function transaction()
     {
-        return $this->belongsTo(Employee::class);
+        return $this->belongsTo(Transaction::class);
     }
 
     public function user()

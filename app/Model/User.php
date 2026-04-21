@@ -9,20 +9,14 @@ use Src\Auth\IdentityInterface;
 class User extends Model implements IdentityInterface
 {
     use HasFactory;
-
+    const CREATED_AT = 'created_at';
     const UPDATED_AT = null;
+
     protected $fillable = [
         'login',
-        'password'
+        'password',
+        'role'
     ];
-
-    protected static function booted()
-    {
-        static::created(function ($user) {
-            $user->password = md5($user->password);
-            $user->save();
-        });
-    }
 
     public function findIdentity(int $id)
     {
@@ -36,23 +30,20 @@ class User extends Model implements IdentityInterface
 
     public function attemptIdentity(array $credentials)
     {
-        return self::where(['login' => $credentials['login'],
-            'password' => md5($credentials['password'])])->first();
+        return self::where([
+            'login' => $credentials['login'],
+            'password' => md5($credentials['password'])
+        ])->first();
     }
 
-    public function roles()
+    public function isAdmin(): bool
     {
-        return $this->belongsToMany(Role::class, 'userrole');
+        return $this->role === 'admin';
     }
 
-    public function isAdmin()
+    public function isAccountant(): bool
     {
-        return $this->roles->contains('name', 'admin');
-    }
-
-    public function isAccountant()
-    {
-        return $this->roles->contains('name', 'accountant');
+        return $this->role === 'accountant';
     }
 
     public function payslips()

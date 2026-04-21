@@ -14,7 +14,7 @@ class Accrual extends Model
         'amount',
         'month',
         'employee_id',
-        'accrual_type_id',
+        'accrual_type',
         'date_of_accrual'
     ];
 
@@ -23,8 +23,8 @@ class Accrual extends Model
         return $this->belongsTo(Employee::class);
     }
 
-    public function type()
+    public function transactions()
     {
-        return $this->belongsTo(AccrualType::class, 'accrual_type_id');
+        return $this->hasMany(Transaction::class);
     }
 }

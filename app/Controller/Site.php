@@ -19,7 +19,7 @@ class Site
 
     public function hello(): string
     {
-        return new View('site.hello', ['message' => 'hello working']);
+        return (new View())->render('site.hello', ['message' => 'hello working']);
     }
 
     public function signup(Request $request): string
@@ -34,12 +34,12 @@ class Site
     public function login(Request $request): string
     {
         if ($request->method === 'GET') {
-            return new View('site.login');
+            return (new View())->render('site.login');
         }
         if (Auth::attempt($request->all())) {
-            app()->route->redirect('/hello');
+            app()->route->redirect('/dashboard');
         }
-        return new View('site.login', ['message' => 'Неправильные логин или пароль']);
+        return (new View())->render('site.login', ['message' => 'Неправильные логин или пароль']);
     }
 
     public function logout(): void
