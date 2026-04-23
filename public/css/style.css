@@ -361,3 +361,16 @@ textarea {
 .form-container h1 {
     text-align: center;
 }
+
+.employee-details {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+}
+.info-block p {
+    margin: 10px 0;
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+}

@@ -16,6 +16,7 @@
                         <p><strong>ИНН:</strong> <?= htmlspecialchars($employee->payer_number) ?></p>
                     </div>
                     <div class="card-actions">
+                        <a href="<?= app()->route->getUrl('/employee/' . $employee->id) ?>" class="btn-add">Подробнее</a>
                         <?php if (app()->auth->user()->isAccountant()): ?>
                             <a href="/pop-it-mvc/transactions" class="btn-add">Добавить начисление</a>
                             <a href="/pop-it-mvc/transactions" class="btn-add">Добавить вычет</a>

@@ -15,10 +15,4 @@
         <p><strong>Надбавка:</strong> <?= number_format($employee->bonus, 2) ?> ₽</p>
         <p><strong>Оклад:</strong> <?= number_format($employee->salary, 2) ?> ₽</p>
     </div>
-
-    <div class="tabs">
-        <a href="/employee/<?= $employee->id ?>/accruals" class="tab">Начисления</a>
-        <a href="/employee/<?= $employee->id ?>/deductions" class="tab">Вычеты</a>
-        <a href="/employee/<?= $employee->id ?>/payslips" class="tab">Расчетные листки</a>
-    </div>
 </div>
