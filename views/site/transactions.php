@@ -1,6 +1,17 @@
 <div class="transactions-page">
     <h1>Операции</h1>
 
+    <?php if (!empty($_SESSION['errors'])): ?>
+        <div class="error-list">
+            <?php foreach ($_SESSION['errors'] as $field => $errors): ?>
+                <?php foreach ($errors as $error): ?>
+                    <div class="error-message"><?= htmlspecialchars($error) ?></div>
+                <?php endforeach; ?>
+            <?php endforeach; ?>
+        </div>
+        <?php unset($_SESSION['errors']); ?>
+    <?php endif; ?>
+
     <div class="forms-row">
         <div class="form-card">
             <h2>Добавить начисление</h2>

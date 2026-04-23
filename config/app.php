@@ -7,7 +7,16 @@ return [
     ],
     'validators' => [
         'required' => \Validators\RequireValidator::class,
-        'unique' => \Validators\UniqueValidator::class
+        'unique' => \Validators\UniqueValidator::class,
+        'positive' => \Validators\PositiveNumberValidator::class,
+        'payerNumber' => \Validators\PayerNumberValidator::class,
+        'insuranceNumber' => \Validators\InsuranceNumberValidator::class,
+        'bankAccount' => \Validators\BankAccountValidator::class,
+        'month' => \Validators\MonthValidator::class,
+        'dateNotFuture' => \Validators\DateNotFutureValidator::class,
+        'dateRange' => \Validators\DateRangeValidator::class,
+        'digits' => \Validators\DigitsValidator::class,
+        'alphabet' => \Validators\AlphabetValidator::class
     ],
     'routeAppMiddleware' => [
         'csrf' => \Middlewares\CSRFMiddleware::class,

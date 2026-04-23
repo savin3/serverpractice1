@@ -38,6 +38,24 @@ class TransactionController
 
     public function addAccrual(Request $request): void
     {
+        $validator = new Validator($request->all(), [
+            'employee_id' => ['required'],
+            'amount' => ['required', 'positive'],
+            'month' => ['required', 'month'],
+            'date_of_accrual' => ['required', 'dateNotFuture']
+        ], [
+            'required' => 'Поле :field пусто',
+            'positive' => 'Сумма должна быть положительным числом',
+            'month' => 'Месяц должен быть от 1 до 12',
+            'dateNotFuture' => 'Дата не может быть позже текущей'
+        ]);
+
+        if ($validator->fails()) {
+            $_SESSION['errors'] = $validator->errors();
+            app()->route->redirect('/transactions');
+            return;
+        }
+
         $accrual = Accrual::create($request->all());
         Transaction::create([
             'accrual_id' => $accrual->id,
@@ -82,6 +100,26 @@ class TransactionController
 
     public function storePermanentDeduction(Request $request): void
     {
+        $validator = new Validator($request->all(), [
+            'employee_id' => ['required'],
+            'amount' => ['required', 'positive'],
+            'month' => ['required', 'month'],
+            'start_date' => ['required', 'dateNotFuture'],
+            'end_date' => ['dateRange:' . $request->start_date]
+        ], [
+            'required' => 'Поле :field пусто',
+            'positive' => 'Сумма должна быть положительным числом',
+            'month' => 'Месяц должен быть от 1 до 12',
+            'dateNotFuture' => 'Дата не может быть позже текущей',
+            'dateRange' => 'Дата окончания не может быть раньше даты начала'
+        ]);
+
+        if ($validator->fails()) {
+            $_SESSION['errors'] = $validator->errors();
+            app()->route->redirect('/permanent-deductions');
+            return;
+        }
+
         $deduction = Deduction::create([
             'amount' => $request->amount,
             'month' => $request->month,

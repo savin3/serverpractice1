@@ -6,6 +6,7 @@ use Src\View;
 use Src\Request;
 use Model\Employee;
 use Model\User;
+use Src\Validator\Validator;
 
 class AdminController
 {
@@ -22,18 +23,32 @@ class AdminController
 
     public function storeEmployee(Request $request): void
     {
-        $data = $request->all();
+        $validator = new Validator($request->all(), [
+            'first_name' => ['required', 'alphabet'],
+            'last_name' => ['required', 'alphabet'],
+            'patronymic' => ['required', 'alphabet'],
+            'insurance_number' => ['required', 'insuranceNumber'],
+            'payer_number' => ['required', 'payerNumber'],
+            'bank_account' => ['required', 'bankAccount'],
+            'employee_number' => ['required', 'digits'],
+            'salary' => ['required', 'positive']
+        ], [
+            'required' => 'Поле :field пусто',
+            'positive' => 'Поле :field должно быть положительным числом',
+            'insuranceNumber' => 'Неверный формат СНИЛС (XXX-XXX-XXX XX)',
+            'payerNumber' => 'Неверный формат ИНН (10 или 12 цифр)',
+            'bankAccount' => 'Неверный формат банковского счёта (20 цифр)',
+            'digits' => 'Неверный формат табельного номера (должно содержать только цифры)',
+            'alphabet' => 'Поле :field должно содержать только буквы'
+        ]);
 
-        $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/pop-it-mvc/public/uploads/';
-        if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
+        if ($validator->fails()) {
+            $_SESSION['errors'] = $validator->errors();
+            app()->route->redirect('/admin/employee/add');
+            return;
         }
-        $ext = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
-        $filename = uniqid() . '.' . $ext;
-        move_uploaded_file($_FILES['photo']['tmp_name'], $uploadDir . $filename);
-        $data['photo'] = '/pop-it-mvc/public/uploads/' . $filename;
 
-        Employee::create($data);
+        Employee::create($request->all());
         app()->route->redirect('/dashboard');
     }
 
@@ -44,6 +59,20 @@ class AdminController
 
     public function storeUser(Request $request): void
     {
+        $validator = new Validator($request->all(), [
+            'login' => ['required', 'unique:users,login'],
+            'password' => ['required']
+        ], [
+            'required' => 'Поле :field пусто',
+            'unique' => 'Пользователь с таким логином уже существует'
+        ]);
+
+        if ($validator->fails()) {
+            $_SESSION['errors'] = $validator->errors();
+            app()->route->redirect('/admin/user/add');
+            return;
+        }
+
         User::create([
             'login' => $request->login,
             'password' => md5($request->password),

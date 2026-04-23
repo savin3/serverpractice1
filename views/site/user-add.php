@@ -1,4 +1,15 @@
 <div class="form-container">
+    <?php if (!empty($_SESSION['errors'])): ?>
+        <div class="error-list">
+            <?php foreach ($_SESSION['errors'] as $field => $errors): ?>
+                <?php foreach ($errors as $error): ?>
+                    <div class="error-message"><?= htmlspecialchars($error) ?></div>
+                <?php endforeach; ?>
+            <?php endforeach; ?>
+        </div>
+        <?php unset($_SESSION['errors']); ?>
+    <?php endif; ?>
+
     <h1>Добавление бухгалтера</h1>
 
     <form method="POST" action="<?= app()->route->getUrl('/admin/user/store') ?>">
