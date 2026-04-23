@@ -34,4 +34,28 @@ class Employee extends Model
     {
         return $this->hasManyThrough(Transaction::class, Accrual::class);
     }
+
+    public static function getPositionTypes()
+    {
+        $connection = \Illuminate\Database\Capsule\Manager::connection();
+        $raw = $connection->select("SHOW COLUMNS FROM employees WHERE Field = 'position'");
+        if (empty($raw)) {
+            return [];
+        }
+        $enumStr = $raw[0]->Type;
+        preg_match_all("/'([^']+)'/", $enumStr, $matches);
+        return $matches[1];
+    }
+
+    public static function getDepartmentTypes()
+    {
+        $connection = \Illuminate\Database\Capsule\Manager::connection();
+        $raw = $connection->select("SHOW COLUMNS FROM employees WHERE Field = 'department'");
+        if (empty($raw)) {
+            return [];
+        }
+        $enumStr = $raw[0]->Type;
+        preg_match_all("/'([^']+)'/", $enumStr, $matches);
+        return $matches[1];
+    }
 }

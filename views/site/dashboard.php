@@ -17,9 +17,9 @@
                     </div>
                     <div class="card-actions">
                         <?php if (app()->auth->user()->isAccountant()): ?>
-                            <a href="/transactions?employee_id=<?= $employee->id ?>" class="btn-add">Добавить начисление</a>
-                            <a href="/transactions?employee_id=<?= $employee->id ?>" class="btn-add">Добавить вычет</a>
-                            <a href="/payslip?employee_id=<?= $employee->id ?>" class="btn-add">Формирование расчета</a>
+                            <a href="/pop-it-mvc/transactions" class="btn-add">Добавить начисление</a>
+                            <a href="/pop-it-mvc/transactions" class="btn-add">Добавить вычет</a>
+                            <a href="/pop-it-mvc/payslip" class="btn-add">Формирование расчета</a>
                         <?php endif; ?>
                     </div>
                 </div>

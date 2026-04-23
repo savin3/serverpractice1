@@ -316,3 +316,48 @@ textarea {
 .permanent-list th {
     background: #f2f2f2;
 }
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-cancel {
+    background: #ccc;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-cancel:hover {
+    background: #bbb;
+}
+
+.btn {
+    font-family: inherit;
+}
+
+.btn, .btn-cancel {
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.form-container h1 {
+    text-align: center;
+}

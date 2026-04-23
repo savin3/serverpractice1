@@ -11,27 +11,33 @@ class AdminController
 {
     public function addEmployee(): string
     {
-        return (new View())->render('admin.employee_add');
+        $positions = Employee::getPositionTypes();
+        $departments = Employee::getDepartmentTypes();
+
+        return (new View())->render('site.employee-add', [
+            'positions' => $positions,
+            'departments' => $departments
+        ]);
     }
 
     public function storeEmployee(Request $request): void
     {
-        $data = $request->all();
-        Employee::create($data);
+        Employee::create($request->all());
         app()->route->redirect('/dashboard');
     }
 
     public function addUser(): string
     {
-        return (new View())->render('admin.user_add');
+        return (new View())->render('site.user-add');
     }
 
     public function storeUser(Request $request): void
     {
-        $data = $request->all();
-        $data['password'] = md5($data['password']);
-        $data['role'] = 'accountant';
-        User::create($data);
+        User::create([
+            'login' => $request->login,
+            'password' => md5($request->password),
+            'role' => 'accountant'
+        ]);
         app()->route->redirect('/dashboard');
     }
 }
