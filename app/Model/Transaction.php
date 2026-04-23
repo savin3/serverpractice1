@@ -29,6 +29,13 @@ class Transaction extends Model
         return $this->belongsTo(Deduction::class);
     }
 
+    public static function getPermanentDeductions()
+    {
+        return self::with('deduction', 'accrual.employee')
+            ->whereNotNull('start_date')
+            ->get();
+    }
+
     public function payslips()
     {
         return $this->hasMany(Payslip::class);

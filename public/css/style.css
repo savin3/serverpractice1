@@ -290,3 +290,29 @@ textarea {
     margin-top: 30px;
     overflow-x: auto;
 }
+
+.permanent-deductions-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.permanent-list {
+    margin-top: 40px;
+}
+
+.permanent-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.permanent-list th,
+.permanent-list td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.permanent-list th {
+    background: #f2f2f2;
+}

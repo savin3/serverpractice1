@@ -15,7 +15,8 @@
             <?php if (app()->auth->user()->isAccountant()): ?>
                 <a href="<?= app()->route->getUrl('/dashboard') ?>">Главная</a>
                 <a href="<?= app()->route->getUrl('/transactions') ?>">Операции</a>
-                <a href="<?= app()->route->getUrl('/payslip') ?>">Расчетный листок</a>
+                <a href="<?= app()->route->getUrl('/permanent-deductions') ?>">Постоянные вычеты</a>
+                <a href="<?= app()->route->getUrl('/payslip') ?>">Расчетный лист</a>
             <?php elseif (app()->auth->user()->isAdmin()): ?>
                 <a href="<?= app()->route->getUrl('/dashboard') ?>">Главная</a>
                 <a href="<?= app()->route->getUrl('/admin/employee/add') ?>">Добавить сотрудника</a>

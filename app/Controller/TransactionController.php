@@ -55,10 +55,55 @@ class TransactionController
             'accrual_id' => $accrual->id,
             'deduction_id' => $deduction->id,
             'amount' => $request->amount,
-            'date_transaction' => $request->date_of_deduction,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date
+            'date_transaction' => $request->date_of_deduction
         ]);
         app()->route->redirect('/transactions');
+    }
+
+    public function permanentDeductions(): string
+    {
+        $employees = Employee::all();
+        $permanentTransactions = Transaction::getPermanentDeductions();
+        $deductionTypes = Deduction::getTypes();
+
+        $months = [
+            '1' => 'Январь', '2' => 'Февраль', '3' => 'Март', '4' => 'Апрель',
+            '5' => 'Май', '6' => 'Июнь', '7' => 'Июль', '8' => 'Август',
+            '9' => 'Сентябрь', '10' => 'Октябрь', '11' => 'Ноябрь', '12' => 'Декабрь'
+        ];
+
+        return (new View())->render('site.permanent-deductions', [
+            'employees' => $employees,
+            'permanentTransactions' => $permanentTransactions,
+            'deductionTypes' => $deductionTypes,
+            'months' => $months
+        ]);
+    }
+
+    public function storePermanentDeduction(Request $request): void
+    {
+        $deduction = Deduction::create([
+            'amount' => $request->amount,
+            'month' => $request->month,
+            'deduction_type' => $request->deduction_type,
+            'date_of_deduction' => $request->date_of_deduction,
+            'comment' => $request->comment
+        ]);
+
+        $accrual = Accrual::firstOrCreate(
+            ['employee_id' => $request->employee_id, 'month' => $request->month],
+            ['amount' => 0, 'accrual_type' => 'salary', 'date_of_accrual' => $request->start_date]
+        );
+
+        Transaction::create([
+            'accrual_id' => $accrual->id,
+            'deduction_id' => $deduction->id,
+            'amount' => $request->amount,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'date_transaction' => $request->date_of_deduction
+        ]);
+
+        app()->route->redirect('/permanent-deductions');
     }
 }

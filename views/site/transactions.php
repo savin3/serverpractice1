@@ -58,7 +58,7 @@
                         <option value="" disabled selected>Выберите начисление</option>
                         <?php foreach ($accruals as $accrual): ?>
                             <option value="<?= $accrual->id ?>">
-                                <?= htmlspecialchars($accrual->employee->last_name . ' ' . $accrual->employee->first_name . ' — ' . $accrual->type . ' (' . $accrual->amount . ' ₽)') ?>
+                                <?= htmlspecialchars($accrual->employee->last_name . ' ' . $accrual->employee->first_name . ' ' . $accrual->employee->patronymic . ' — ' . $accrual->type . ' (' . $accrual->amount . ' ₽)') ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
@@ -87,16 +87,6 @@
                             <option value="<?= $num ?>"><?= $name ?></option>
                         <?php endforeach; ?>
                     </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="start_date">Дата начала (для постоянного вычета)</label>
-                    <input type="date" name="start_date" id="start_date">
-                </div>
-
-                <div class="form-group">
-                    <label for="end_date">Дата окончания (для постоянного вычета)</label>
-                    <input type="date" name="end_date" id="end_date">
                 </div>
 
                 <div class="form-group">
@@ -140,7 +130,7 @@
                     </td>
                     <td>
                         <?php if ($transaction->accrual && $transaction->accrual->employee): ?>
-                            <?= htmlspecialchars($transaction->accrual->employee->last_name . ' ' . $transaction->accrual->employee->first_name) ?>
+                            <?= htmlspecialchars($transaction->accrual->employee->last_name . ' ' . $transaction->accrual->employee->first_name . ' ' . $transaction->accrual->employee->patronymic) ?>
                         <?php else: ?>
                             —
                         <?php endif; ?>
