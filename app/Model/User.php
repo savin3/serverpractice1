@@ -18,6 +18,14 @@ class User extends Model implements IdentityInterface
         'role'
     ];
 
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            $user->password = md5($user->password);
+            $user->save();
+        });
+    }
+
     public function findIdentity(int $id)
     {
         return self::where('id', $id)->first();

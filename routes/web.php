@@ -17,11 +17,8 @@ Route::add('GET', '/logout', [UserController::class, 'logout']);
 
 Route::add('GET', '/dashboard', [EmployeeController::class, 'dashboard'])->middleware('auth');
 Route::add('GET', '/employee/{id}', [EmployeeController::class, 'employee'])->middleware('auth');
-Route::add('GET', '/employee/{id}/accruals', [EmployeeController::class, 'employeeAccruals'])->middleware('auth');
-Route::add('GET', '/employee/{id}/deductions', [EmployeeController::class, 'employeeDeductions'])->middleware('auth');
-Route::add('GET', '/employee/{id}/payslips', [EmployeeController::class, 'employeePayslips'])->middleware('auth');
 
-Route::add('GET', '/transactions', [TransactionController::class, 'index']);
+Route::add('GET', '/transactions', [TransactionController::class, 'index'])->middleware('auth');
 Route::add('POST', '/transactions/add-accrual', [TransactionController::class, 'addAccrual'])->middleware('auth');
 Route::add('POST', '/transactions/add-deduction', [TransactionController::class, 'addDeduction'])->middleware('auth');
 
