@@ -1,7 +1,9 @@
 <div class="form-container">
     <h1>Добавление сотрудника</h1>
 
-    <form method="POST" action="<?= app()->route->getUrl('/admin/employee/store') ?>">
+    <form method="POST" action="<?= app()->route->getUrl('/admin/employee/store') ?>" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="<?= app()->auth::generateCSRF() ?>">
+
         <div class="form-group">
             <label for="first_name">Имя</label>
             <input type="text" name="first_name" id="first_name" required>
@@ -70,6 +72,11 @@
         <div class="form-group">
             <label for="salary">Оклад (₽)</label>
             <input type="number" name="salary" id="salary" required>
+        </div>
+
+        <div class="form-group">
+            <label for="photo">Фото сотрудника</label>
+            <input type="file" name="photo" id="photo" accept="image/*">
         </div>
 
         <div class="form-actions">

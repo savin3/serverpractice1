@@ -5,6 +5,8 @@
         <div class="form-card">
             <h2>Добавить начисление</h2>
             <form method="POST" action="/pop-it-mvc/transactions/add-accrual">
+                <input type="hidden" name="csrf_token" value="<?= app()->auth::generateCSRF() ?>">
+
                 <div class="form-group">
                     <label for="employee_id">Сотрудник</label>
                     <select name="employee_id" id="employee_id" required>
@@ -52,6 +54,8 @@
         <div class="form-card">
             <h2>Добавить вычет</h2>
             <form method="POST" action="/pop-it-mvc/transactions/add-deduction">
+                <input type="hidden" name="csrf_token" value="<?= app()->auth::generateCSRF() ?>">
+
                 <div class="form-group">
                     <label for="accrual_id">Начисление</label>
                     <select name="accrual_id" id="accrual_id" required>

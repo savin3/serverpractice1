@@ -1,12 +1,26 @@
 <div class="dashboard">
     <h1>Список сотрудников</h1>
 
+    <div class="search-form">
+        <form method="GET" action="">
+            <input type="text" name="search" placeholder="Поиск по фамилии, имени, табельному номеру" value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+            <button type="submit" class="btn">Найти</button>
+            <a href="<?= app()->route->getUrl('/dashboard') ?>" class="btn">Сбросить</a>
+        </form>
+    </div>
+
     <?php if (empty($employees)): ?>
         <p>Нет сотрудников</p>
     <?php else: ?>
         <div class="employees-grid">
             <?php foreach ($employees as $employee): ?>
                 <div class="employee-card">
+                    <?php if ($employee->photo): ?>
+                        <div class="employee-photo">
+                            <img src="<?= $employee->photo ?>" alt="Фото" width="80" height="80">
+                        </div>
+                    <?php endif; ?>
+
                     <div class="card-body">
                         <p><strong>Фамилия:</strong> <?= htmlspecialchars($employee->last_name) ?></p>
                         <p><strong>Имя:</strong> <?= htmlspecialchars($employee->first_name) ?></p>

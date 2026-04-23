@@ -4,6 +4,8 @@
     <div class="form-card">
         <h2>Расчётный лист сотрудника</h2>
         <form method="POST" action="<?= app()->route->getUrl('/payslip') ?>">
+            <input type="hidden" name="csrf_token" value="<?= app()->auth::generateCSRF() ?>">
+
             <div class="form-group">
                 <label for="employee_id">Сотрудник</label>
                 <select name="employee_id" id="employee_id" required>
@@ -31,6 +33,8 @@
     <div class="form-card">
         <h2>Среднемесячная зарплата по подразделениям</h2>
         <form method="POST" action="<?= app()->route->getUrl('/payslip') ?>">
+            <input type="hidden" name="csrf_token" value="<?= app()->auth::generateCSRF() ?>">
+
             <div class="form-group">
                 <label for="report_department">Подразделение</label>
                 <select name="report_department" required>

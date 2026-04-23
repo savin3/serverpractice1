@@ -22,7 +22,18 @@ class AdminController
 
     public function storeEmployee(Request $request): void
     {
-        Employee::create($request->all());
+        $data = $request->all();
+
+        $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/pop-it-mvc/public/uploads/';
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+        $ext = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
+        $filename = uniqid() . '.' . $ext;
+        move_uploaded_file($_FILES['photo']['tmp_name'], $uploadDir . $filename);
+        $data['photo'] = '/pop-it-mvc/public/uploads/' . $filename;
+
+        Employee::create($data);
         app()->route->redirect('/dashboard');
     }
 

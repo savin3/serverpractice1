@@ -22,7 +22,8 @@ class Employee extends Model
         'position',
         'department',
         'bonus',
-        'salary'
+        'salary',
+        'photo'
     ];
 
     public function accruals()

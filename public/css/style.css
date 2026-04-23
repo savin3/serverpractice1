@@ -100,6 +100,8 @@ nav a:last-child:hover {
 
 .info-block p {
     margin: 10px 0;
+    padding: 5px;
+    border-bottom: 1px solid #eee;
 }
 
 .tabs {
@@ -122,18 +124,20 @@ nav a:last-child:hover {
     color: #fff;
 }
 
-.data-table table {
+.data-table table, .permanent-list table, .result-block table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.data-table th, .data-table td {
+.data-table th, .data-table td,
+.permanent-list th, .permanent-list td,
+.result-block th, .result-block td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
 
-.data-table th {
+.data-table th, .permanent-list th, .result-block th {
     background: #f2f2f2;
 }
 
@@ -148,7 +152,7 @@ nav a:last-child:hover {
     color: #555;
 }
 
-.form-group input, .form-group select {
+.form-group input, .form-group select, textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -157,7 +161,12 @@ nav a:last-child:hover {
     box-sizing: border-box;
 }
 
-.btn, .btn-add, .button {
+textarea {
+    font-family: inherit;
+    resize: vertical;
+}
+
+.btn, .btn-add, .button, .btn-cancel {
     background: #2196F3;
     color: #fff;
     text-decoration: none;
@@ -165,6 +174,8 @@ nav a:last-child:hover {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
 }
 
 .btn-add {
@@ -176,7 +187,6 @@ nav a:last-child:hover {
 
 .btn {
     padding: 10px 20px;
-    font-size: 14px;
 }
 
 .button {
@@ -188,7 +198,13 @@ nav a:last-child:hover {
     font-size: 16px;
 }
 
-.btn:hover, .btn-add:hover, .button:hover {
+.btn-cancel {
+    background: #ccc;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn:hover, .btn-add:hover, .button:hover, .btn-cancel:hover {
     filter: brightness(0.9);
 }
 
@@ -214,7 +230,7 @@ nav a:last-child:hover {
     text-align: center;
 }
 
-.transactions-page {
+.transactions-page, .permanent-deductions-page, .payslip-page {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -231,32 +247,21 @@ nav a:last-child:hover {
     flex: 1;
     min-width: 300px;
     background: #f9f9f9;
-    padding: 15px;
+    padding: 20px;
     border-radius: 10px;
     border: 1px solid #ddd;
+    margin-bottom: 30px;
 }
 
 .form-card h2 {
     margin-top: 0;
     margin-bottom: 20px;
     font-size: 20px;
+    text-align: center;
 }
 
-textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-family: inherit;
-    resize: vertical;
-}
-
-.transactions-list {
-    margin-top: 20px;
-}
-
-.transactions-list h2 {
-    margin-bottom: 15px;
+.form-card .form-group {
+    margin-bottom: 10px;
 }
 
 .form-card form .btn {
@@ -266,55 +271,19 @@ textarea {
     min-width: 200px;
 }
 
-.form-card .form-group {
-    margin-bottom: 10px;
+.transactions-list, .permanent-list {
+    margin-top: 30px;
+    overflow-x: auto;
 }
 
-.form-card h2 {
-    text-align: center;
-}
-
-.transactions-list table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
+.transactions-list h2, .permanent-list h2 {
+    margin-bottom: 15px;
 }
 
 .transactions-list th, .transactions-list td {
     padding: 10px 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-}
-
-.transactions-list {
-    margin-top: 30px;
-    overflow-x: auto;
-}
-
-.permanent-deductions-page {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.permanent-list {
-    margin-top: 40px;
-}
-
-.permanent-list table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.permanent-list th,
-.permanent-list td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.permanent-list th {
-    background: #f2f2f2;
 }
 
 .form-actions {
@@ -332,32 +301,6 @@ textarea {
     border-radius: 10px;
 }
 
-.form-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.btn-cancel {
-    background: #ccc;
-    text-decoration: none;
-    display: inline-block;
-    text-align: center;
-}
-
-.btn-cancel:hover {
-    background: #bbb;
-}
-
-.btn {
-    font-family: inherit;
-}
-
-.btn, .btn-cancel {
-    font-family: inherit;
-    font-size: 14px;
-}
-
 .form-container h1 {
     text-align: center;
 }
@@ -368,48 +311,6 @@ textarea {
     padding: 20px;
     background: #f9f9f9;
     border-radius: 10px;
-}
-.info-block p {
-    margin: 10px 0;
-    padding: 5px;
-    border-bottom: 1px solid #eee;
-}
-
-.payslip-page {
-    max-width: 800px;
-    margin: 20px auto;
-}
-
-.form-card {
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 30px;
-}
-
-.result-block {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    margin-top: 20px;
-}
-
-.report-table {
-    margin-top: 15px;
-    overflow-x: auto;
-}
-
-.report-table table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.report-table th,
-.report-table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
 }
 
 .result-block {
@@ -431,22 +332,31 @@ textarea {
 }
 
 .result-block table {
-    width: 100%;
-    border-collapse: collapse;
     margin-top: 15px;
 }
 
-.result-block th,
-.result-block td {
-    border: 1px solid #ddd;
+.search-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.search-form input {
+    flex: 1;
+    min-width: 320px;
     padding: 10px;
-    text-align: left;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-.result-block th {
-    background: #f2f2f2;
+.employee-photo {
+    margin-right: 15px;
+    float: left;
 }
 
-.payslip-page .form-card {
-    margin-bottom: 30px;
+.employee-photo img {
+    border-radius: 50%;
+    object-fit: cover;
 }

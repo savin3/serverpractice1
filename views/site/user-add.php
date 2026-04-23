@@ -2,6 +2,8 @@
     <h1>Добавление бухгалтера</h1>
 
     <form method="POST" action="<?= app()->route->getUrl('/admin/user/store') ?>">
+        <input type="hidden" name="csrf_token" value="<?= app()->auth::generateCSRF() ?>">
+
         <div class="form-group">
             <label for="login">Логин</label>
             <input type="text" name="login" id="login" required>

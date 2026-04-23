@@ -5,9 +5,9 @@
         <div class="error-message"><?= htmlspecialchars($message) ?></div>
     <?php endif; ?>
 
-    <input type="hidden" name="csrf_token" value="<?= app()->auth::generateCSRF() ?>">
-
     <form method="POST">
+        <input type="hidden" name="csrf_token" value="<?= app()->auth::generateCSRF() ?>">
+
         <div class="form-group">
             <label for="login">Логин</label>
             <input type="text" id="login" name="login" required>

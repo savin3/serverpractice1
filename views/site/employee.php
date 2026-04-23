@@ -1,6 +1,12 @@
 <div class="employee-details">
     <h1>Информация о сотруднике</h1>
 
+    <div class="employee-photo">
+        <?php if (!empty($employee->photo)): ?>
+            <img src="<?= $employee->photo ?>" alt="Фото" style="max-width: 150px; border-radius: 50%;">
+        <?php endif; ?>
+    </div>
+
     <div class="info-block">
         <p><strong>Фамилия:</strong> <?= htmlspecialchars($employee->last_name) ?></p>
         <p><strong>Имя:</strong> <?= htmlspecialchars($employee->first_name) ?></p>
