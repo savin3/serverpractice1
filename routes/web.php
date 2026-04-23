@@ -4,8 +4,7 @@ use Src\Route;
 use Controller\Site;
 use Controller\UserController;
 use Controller\EmployeeController;
-use Controller\AccrualController;
-use Controller\DeductionController;
+use Controller\TransactionController;
 use Controller\PayslipController;
 use Controller\AdminController;
 
@@ -22,11 +21,9 @@ Route::add('GET', '/employee/{id}/accruals', [EmployeeController::class, 'employ
 Route::add('GET', '/employee/{id}/deductions', [EmployeeController::class, 'employeeDeductions'])->middleware('auth');
 Route::add('GET', '/employee/{id}/payslips', [EmployeeController::class, 'employeePayslips'])->middleware('auth');
 
-Route::add('GET', '/accruals', [AccrualController::class, 'index'])->middleware('auth');
-Route::add('POST', '/accruals/store', [AccrualController::class, 'store'])->middleware('auth');
-
-Route::add('GET', '/deductions', [DeductionController::class, 'index'])->middleware('auth');
-Route::add('POST', '/deductions/store', [DeductionController::class, 'store'])->middleware('auth');
+Route::add('GET', '/transactions', [TransactionController::class, 'index']);
+Route::add('POST', '/transactions/add-accrual', [TransactionController::class, 'addAccrual'])->middleware('auth');
+Route::add('POST', '/transactions/add-deduction', [TransactionController::class, 'addDeduction'])->middleware('auth');
 
 Route::add('GET', '/payslip', [PayslipController::class, 'index'])->middleware('auth');
 Route::add('POST', '/payslip/generate', [PayslipController::class, 'generate'])->middleware('auth');

@@ -11,9 +11,9 @@
                         <p><strong>Фамилия:</strong> <?= htmlspecialchars($employee->last_name) ?></p>
                         <p><strong>Имя:</strong> <?= htmlspecialchars($employee->first_name) ?></p>
                         <p><strong>Отчество:</strong> <?= htmlspecialchars($employee->patronymic) ?></p>
-                        <p><strong>Табельный номер:</strong> <?= htmlspecialchars($employee->payer_number) ?></p>
+                        <p><strong>Табельный номер:</strong> <?= htmlspecialchars($employee->employee_number) ?></p>
                         <p><strong>СНИЛС:</strong> <?= htmlspecialchars($employee->insurance_number) ?></p>
-                        <p><strong>ИНН:</strong> <?= htmlspecialchars($employee->employee_number) ?></p>
+                        <p><strong>ИНН:</strong> <?= htmlspecialchars($employee->payer_number) ?></p>
                     </div>
                     <div class="card-actions">
                         <?php if (app()->auth->user()->isAccountant()): ?>

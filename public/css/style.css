@@ -213,3 +213,80 @@ nav a:last-child:hover {
     margin-bottom: 20px;
     text-align: center;
 }
+
+.transactions-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.forms-row {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.form-card {
+    flex: 1;
+    min-width: 300px;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.form-card h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.transactions-list {
+    margin-top: 20px;
+}
+
+.transactions-list h2 {
+    margin-bottom: 15px;
+}
+
+.form-card form .btn {
+    display: block;
+    margin: 20px auto 0;
+    width: auto;
+    min-width: 200px;
+}
+
+.form-card .form-group {
+    margin-bottom: 10px;
+}
+
+.form-card h2 {
+    text-align: center;
+}
+
+.transactions-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.transactions-list th, .transactions-list td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.transactions-list {
+    margin-top: 30px;
+    overflow-x: auto;
+}

@@ -14,8 +14,7 @@
         <?php if (app()->auth->check()): ?>
             <?php if (app()->auth->user()->isAccountant()): ?>
                 <a href="<?= app()->route->getUrl('/dashboard') ?>">Главная</a>
-                <a href="<?= app()->route->getUrl('/accruals') ?>">Начисления</a>
-                <a href="<?= app()->route->getUrl('/deductions') ?>">Вычеты</a>
+                <a href="<?= app()->route->getUrl('/transactions') ?>">Операции</a>
                 <a href="<?= app()->route->getUrl('/payslip') ?>">Расчетный листок</a>
             <?php elseif (app()->auth->user()->isAdmin()): ?>
                 <a href="<?= app()->route->getUrl('/dashboard') ?>">Главная</a>
