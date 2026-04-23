@@ -3,7 +3,7 @@
 
     <div class="form-card">
         <h2>Добавить постоянный вычет</h2>
-        <form method="POST" action="/permanent-deductions/store">
+        <form method="POST" action="<?= app()->route->getUrl('/permanent-deductions/store') ?>">
             <div class="form-group">
                 <label for="employee_id">Сотрудник</label>
                 <select name="employee_id" id="employee_id" required>

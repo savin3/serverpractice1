@@ -25,8 +25,7 @@ Route::add('POST', '/transactions/add-deduction', [TransactionController::class,
 Route::add('GET', '/permanent-deductions', [TransactionController::class, 'permanentDeductions'])->middleware('auth');
 Route::add('POST', '/permanent-deductions/store', [TransactionController::class, 'storePermanentDeduction'])->middleware('auth');
 
-Route::add('GET', '/payslip', [PayslipController::class, 'index'])->middleware('auth');
-Route::add('POST', '/payslip/generate', [PayslipController::class, 'generate'])->middleware('auth');
+Route::add(['GET', 'POST'], '/payslip', [PayslipController::class, 'index'])->middleware('auth');
 
 Route::add('GET', '/admin/employee/add', [AdminController::class, 'addEmployee'])->middleware('auth');
 Route::add('POST', '/admin/employee/store', [AdminController::class, 'storeEmployee'])->middleware('auth');

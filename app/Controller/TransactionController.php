@@ -100,7 +100,7 @@ class TransactionController
             'deduction_id' => $deduction->id,
             'amount' => $request->amount,
             'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
+            'end_date' => empty($request->end_date) ? null : $request->end_date,
             'date_transaction' => $request->date_of_deduction
         ]);
 
