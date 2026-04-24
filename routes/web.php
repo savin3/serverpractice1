@@ -8,11 +8,7 @@ use Controller\TransactionController;
 use Controller\PayslipController;
 use Controller\AdminController;
 
-Route::add('GET', '/hello', [Controller\Site::class, 'hello'])
-    ->middleware('auth');
-Route::add(['GET', 'POST'], '/signup', [Controller\Site::class, 'signup']);
-
-Route::add(['GET', 'POST'], '/login', [UserController::class, 'login']);
+Route::add(['GET', 'POST'], '/', [UserController::class, 'login']);
 Route::add('GET', '/logout', [UserController::class, 'logout']);
 
 Route::add('GET', '/dashboard', [EmployeeController::class, 'dashboard'])->middleware('auth');

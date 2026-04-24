@@ -24,9 +24,9 @@ class AdminController
     public function storeEmployee(Request $request): void
     {
         $validator = new Validator($request->all(), [
-            'first_name' => ['required', 'alphabet'],
-            'last_name' => ['required', 'alphabet'],
-            'patronymic' => ['required', 'alphabet'],
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'patronymic' => ['required'],
             'insurance_number' => ['required', 'insuranceNumber'],
             'payer_number' => ['required', 'payerNumber'],
             'bank_account' => ['required', 'bankAccount'],
@@ -39,7 +39,7 @@ class AdminController
             'payerNumber' => 'Неверный формат ИНН (10 или 12 цифр)',
             'bankAccount' => 'Неверный формат банковского счёта (20 цифр)',
             'digits' => 'Неверный формат табельного номера (должно содержать только цифры)',
-            'alphabet' => 'Поле :field должно содержать только буквы'
+//            'alphabet' => 'Поле :field должно содержать только буквы'
         ]);
 
         if ($validator->fails()) {

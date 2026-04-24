@@ -8,6 +8,7 @@ use Model\Employee;
 use Model\Accrual;
 use Model\Deduction;
 use Model\Transaction;
+use Src\Validator\Validator;
 
 class TransactionController
 {
@@ -15,7 +16,9 @@ class TransactionController
     {
         $employees = Employee::all();
         $accruals = Accrual::with('employee')->get();
-        $transactions = Transaction::with('accrual.employee', 'deduction')->get();
+        $transactions = Transaction::with('accrual.employee', 'deduction')
+            ->orderBy('id', 'desc')
+            ->get();
 
         $accrualTypes = Accrual::getTypes();
         $deductionTypes = Deduction::getTypes();
@@ -42,12 +45,12 @@ class TransactionController
             'employee_id' => ['required'],
             'amount' => ['required', 'positive'],
             'month' => ['required', 'month'],
-            'date_of_accrual' => ['required', 'dateNotFuture']
+//            'date_of_accrual' => ['required', 'dateNotFuture']
         ], [
             'required' => 'Поле :field пусто',
             'positive' => 'Сумма должна быть положительным числом',
             'month' => 'Месяц должен быть от 1 до 12',
-            'dateNotFuture' => 'Дата не может быть позже текущей'
+//            'dateNotFuture' => 'Дата не может быть позже текущей'
         ]);
 
         if ($validator->fails()) {
@@ -104,14 +107,14 @@ class TransactionController
             'employee_id' => ['required'],
             'amount' => ['required', 'positive'],
             'month' => ['required', 'month'],
-            'start_date' => ['required', 'dateNotFuture'],
-            'end_date' => ['dateRange:' . $request->start_date]
+//            'start_date' => ['required', 'dateNotFuture'],
+//            'end_date' => ['dateRange:' . $request->start_date]
         ], [
             'required' => 'Поле :field пусто',
             'positive' => 'Сумма должна быть положительным числом',
             'month' => 'Месяц должен быть от 1 до 12',
-            'dateNotFuture' => 'Дата не может быть позже текущей',
-            'dateRange' => 'Дата окончания не может быть раньше даты начала'
+//            'dateNotFuture' => 'Дата не может быть позже текущей',
+//            'dateRange' => 'Дата окончания не может быть раньше даты начала'
         ]);
 
         if ($validator->fails()) {

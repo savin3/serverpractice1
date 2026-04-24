@@ -23,6 +23,6 @@ class UserController
     public function logout(): void
     {
         Auth::logout();
-        app()->route->redirect('/login');
+        app()->route->redirect('/');
     }
 }

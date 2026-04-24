@@ -23,8 +23,6 @@
                 <a href="<?= app()->route->getUrl('/admin/user/add') ?>">Добавить бухгалтера</a>
             <?php endif; ?>
             <a href="<?= app()->route->getUrl('/logout') ?>">Выход</a>
-        <?php else: ?>
-            <a href="<?= app()->route->getUrl('/login') ?>">Вход</a>
         <?php endif; ?>
     </nav>
 </header>

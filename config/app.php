@@ -13,10 +13,10 @@ return [
         'insuranceNumber' => \Validators\InsuranceNumberValidator::class,
         'bankAccount' => \Validators\BankAccountValidator::class,
         'month' => \Validators\MonthValidator::class,
-        'dateNotFuture' => \Validators\DateNotFutureValidator::class,
-        'dateRange' => \Validators\DateRangeValidator::class,
+//        'dateNotFuture' => \Validators\DateNotFutureValidator::class,
+//        'dateRange' => \Validators\DateRangeValidator::class,
         'digits' => \Validators\DigitsValidator::class,
-        'alphabet' => \Validators\AlphabetValidator::class
+//        'alphabet' => \Validators\AlphabetValidator::class
     ],
     'routeAppMiddleware' => [
         'csrf' => \Middlewares\CSRFMiddleware::class,
