@@ -188,17 +188,6 @@ class AdminControllerTest extends TestCase
         }
     }
 
-    /**
-     * TC_EMPL_4: Доступ только для администратора
-     */
-    public function testStoreEmployeeAccessOnlyForAdmin(): void
-    {
-        $this->assertTrue(true);
-    }
-
-    /**
-     * вспомогательный метод для подмены route в app()
-     */
     private function setMockRoute($mockRoute): void
     {
         $reflection = new \ReflectionClass($GLOBALS['app']);
