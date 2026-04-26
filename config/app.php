@@ -4,6 +4,7 @@ return [
     'identity'=>\Model\User::class,
     'routeMiddleware' => [
         'auth' => \Middlewares\AuthMiddleware::class,
+        'bearer' => \Middlewares\BearerTokenMiddleware::class,
     ],
     'validators' => [
         'required' => \Validators\RequireValidator::class,
@@ -22,7 +23,7 @@ return [
         'csrf' => \Middlewares\CSRFMiddleware::class,
         'trim' => \Middlewares\TrimMiddleware::class,
         'specialChars' => \Middlewares\SpecialCharsMiddleware::class,
-        'json' => \Middlewares\JSONMiddleware::class,
+//        'json' => \Middlewares\JSONMiddleware::class,
     ],
     'providers' => [
         'kernel' => \Providers\KernelProvider::class,

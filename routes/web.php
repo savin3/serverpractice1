@@ -27,3 +27,10 @@ Route::add('GET', '/admin/employee/add', [AdminController::class, 'addEmployee']
 Route::add('POST', '/admin/employee/store', [AdminController::class, 'storeEmployee'])->middleware('auth');
 Route::add('GET', '/admin/user/add', [AdminController::class, 'addUser'])->middleware('auth');
 Route::add('POST', '/admin/user/store', [AdminController::class, 'storeUser'])->middleware('auth');
+
+Route::add('GET', '/api/', [Controller\ApiController::class, 'index']);
+Route::add('POST', '/api/echo', [Controller\ApiController::class, 'echo'])->middleware('csrf');
+
+Route::add('POST', '/api/login', [Controller\ApiAuthController::class, 'login']);
+Route::add('GET', '/api/employees', [Controller\ApiEmployeeController::class, 'index'])->middleware('bearer');
+Route::add('GET', '/api/employee/{id}', [Controller\ApiEmployeeController::class, 'show'])->middleware('bearer');
