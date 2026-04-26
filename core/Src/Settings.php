@@ -6,6 +6,27 @@ use Error;
 
 class Settings
 {
+    public function getRoutePath(): string
+    {
+        return '/' . $this->path['routes'] ?? '';
+    }
+
+    public function getAuthClassName(): string
+    {
+        return $this->app['auth'] ?? '';
+    }
+
+    public function getIdentityClassName(): string
+    {
+        return $this->app['identity'] ?? '';
+    }
+
+    public function removeAppMiddleware(string $key): void
+    {
+        unset($this->_settings['app']['routeAppMiddleware'][$key]);
+    }
+
+
     private array $_settings;
 
     public function __construct(array $settings = [])

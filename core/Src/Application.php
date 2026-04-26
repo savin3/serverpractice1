@@ -14,8 +14,10 @@ class Application
     private Route $route;
     private Capsule $dbManager;
     private Auth $auth;
+    private array $providers = [];
+    private array $binds = [];
 
-    public function __construct(Settings $settings)
+    public function __construct(Settings $settings, array $config = [])
     {
         $this->settings = $settings;
         $this->route = Route::single()->setPrefix($this->settings->getRootPath());
@@ -23,10 +25,44 @@ class Application
         $this->auth = new $this->settings->app['auth'];
         $this->dbRun();
         $this->auth::init(new $this->settings->app['identity']);
+
+        $this->addProviders($config['providers'] ?? []);
+        $this->registerProviders();
+        $this->bootProviders();
+    }
+
+    public function addProviders(array $providers): void
+    {
+        foreach ($providers as $key => $class) {
+            $this->providers[$key] = new $class($this);
+        }
+    }
+
+    private function registerProviders(): void
+    {
+        foreach ($this->providers as $provider) {
+            $provider->register();
+        }
+    }
+
+    private function bootProviders(): void
+    {
+        foreach ($this->providers as $provider) {
+            $provider->boot();
+        }
+    }
+
+    public function bind(string $key, $value): void
+    {
+        $this->binds[$key] = $value;
     }
 
     public function __get($key)
     {
+        if (array_key_exists($key, $this->binds)) {
+            return $this->binds[$key];
+        }
+
         switch ($key) {
             case 'settings':
                 return $this->settings;
