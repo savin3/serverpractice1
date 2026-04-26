@@ -1,7 +1,7 @@
 <?php
-
-function app()
-{
-    global $app;
-    return $app;
-}
+//
+//function app()
+//{
+//    global $app;
+//    return $app;
+//}
